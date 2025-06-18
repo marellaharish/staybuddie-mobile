@@ -21,11 +21,11 @@ const paymentData = [
 ];
 
 
-const PaymentsScreen = () => {
+const ComolaintsScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
     useLayoutEffect(() => {
         navigation.setOptions({
-            headerTitle: `Payment's History`,
+            headerTitle: `Complaint's`,
             headerTitleAlign: 'center', // This centers the title
             headerShadowVisible: false,
             headerLeft: () => (
@@ -51,40 +51,46 @@ const PaymentsScreen = () => {
     return (
         <ScrollView style={[styles.container]}>
 
-            <View style={[Layouts.row, Layouts.spaceBetween]}>
-                <View style={[{ width: "48%" }]}>
-                    <Text style={[styles.inputlabel]}>Month</Text>
-                    <Input
-                        placeholder="Enter Month"
-                        autoCapitalize="none"
-                        containerStyle={{ borderRadius: Metrics.radiusMedium, }}
+            <View >
+                <Text style={[styles.inputlabel]}>Title</Text>
+                <Input
+                    placeholder="Enter Complaint Title"
+                    autoCapitalize="none"
+                    containerStyle={{ borderRadius: Metrics.radiusMedium, }}
+                />
+            </View>
+            <View >
+                <Text style={[styles.inputlabel]}>Complaint Type</Text>
+                <Input
+                    placeholder="Complaint Type"
+                    autoCapitalize="none"
+                    containerStyle={{ borderRadius: Metrics.radiusMedium, }}
+                />
+            </View>
+            <View >
+                <Text style={[styles.inputlabel]}>Description</Text>
+                <Input
+                    placeholder="Describe your complaint"
+                    autoCapitalize="none"
+                    multiline={true}
+                    numberOfLines={4}
+                    inputStyle={{ paddingVertical: Metrics.paddingMedium }}
+                    containerStyle={{ borderRadius: Metrics.radiusMedium, }}
 
-                    // error="Invalid email address"
-                    />
-                </View>
-                <View style={[{ width: "48%" }]}>
-                    <Text style={[styles.inputlabel]}>Year</Text>
-                    <Input
-                        placeholder="Enter Year"
-                        autoCapitalize="none"
-                        containerStyle={{ borderRadius: Metrics.radiusMedium, }}
-
-                    // error="Invalid email address"
-                    />
-                </View>
+                />
             </View>
 
             <View>
-                <Text style={[styles.inputlabel]}>Rent Amount</Text>
+                <Text style={[styles.inputlabel]}>Room Number</Text>
                 <Input
-                    placeholder="Enter Year"
+                    placeholder="Enter Your Room Number"
                     autoCapitalize="none"
                     containerStyle={{ borderRadius: Metrics.radiusMedium, }}
                 />
             </View>
 
             <Button
-                title="Pay Now"
+                title="Submit"
                 onPress={() => console.log("Button Clicked")}
                 variant="primary"
                 loading={false}
@@ -93,7 +99,7 @@ const PaymentsScreen = () => {
 
 
             <View>
-                <Text style={[styles.name, { fontSize: FontSizes.xLarge }]}>Payment History</Text>
+                <Text style={[styles.name, { fontSize: FontSizes.xLarge }]}>Complaints History</Text>
 
                 <FlatList
                     data={paymentData}
@@ -106,7 +112,7 @@ const PaymentsScreen = () => {
         </ScrollView>
     )
 }
-export default PaymentsScreen
+export default ComolaintsScreen
 const styles = StyleSheet.create({
     container: {
         ...Layouts.flex,
@@ -148,3 +154,4 @@ const styles = StyleSheet.create({
         color: colors.gray600,
     },
 })
+

@@ -15,7 +15,8 @@ import { colors, FontSizes, Layouts, Metrics } from 'src/constants';
 import { HomeStackParamList } from 'src/navigation/types';
 const screenWidth = Dimensions.get('window').width;
 
-const HostelDetailsScreen = ({ route }) => {
+
+const HostelDetailsScreen = ({ route }: { route: any }) => {
 
     const { item } = route.params;
     console.log(item)
@@ -66,12 +67,12 @@ const HostelDetailsScreen = ({ route }) => {
         const getLocation = async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
+                setErrorMsg('Permission to access location was denied' as any);
                 return;
             }
 
             let location = await Location.getCurrentPositionAsync({});
-            setLocation(location.coords);
+            setLocation(location.coords as any);
         };
 
         getLocation();

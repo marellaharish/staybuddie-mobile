@@ -10,7 +10,7 @@ const AppNavigator = () => {
     const isAuthenticated = true;
 
     // Simulate current route or app state
-    const currentRoute = 'home'; // This would typically come from context or navigation state
+    const currentRoute: 'home' | 'login' | 'default' = 'home'; // Add 'login' here
 
     let content;
 
@@ -19,9 +19,9 @@ const AppNavigator = () => {
             case 'home':
                 content = <UserMainTabNavigator />;
                 break;
-            case 'login':
-                content = <AuthNavigator />;
-                break;
+            // case 'login':
+            //     content = <AuthNavigator />;
+            //     break;
             default:
                 content = <HomeNavigator />;
                 break;

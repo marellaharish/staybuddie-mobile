@@ -10,6 +10,8 @@ export type MainTabParamList = {
     Home: undefined;
     Search: undefined;
     Profile: undefined;
+    Payments: undefined;
+    Complaints: undefined;
 };
 
 export type RootStackParamList = {
@@ -21,4 +23,5 @@ export type HomeStackParamList = {
     Landing: undefined;
     HostelsList: { city: string };
     HostelDetails: { item: any };
+    Filters: undefined;
 };

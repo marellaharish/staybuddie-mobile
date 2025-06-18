@@ -3,9 +3,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
 import ProfileScreen from '../screens/main/ProfileScreen';
-import SearchScreen from '../screens/main/SearchScreen';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import ComolaintsScreen from 'src/screens/user/ComolaintsScreen';
 import HomeScreen from 'src/screens/user/HomeScreen';
 import PaymentsScreen from 'src/screens/user/PaymentsScreen';
 import { MainTabParamList } from './types'; // We will define this in the next step
@@ -26,7 +26,7 @@ const UserMainTabNavigator = () => {
                             iconName = focused ? 'home' : 'home-outline';
                             break;
                         case 'Payments':
-                            iconName = focused ? 'chatbubble' : 'chatbubble-outline';
+                            iconName = focused ? 'card' : 'card-outline';
                             break;
                         case 'Complaints':
                             iconName = focused ? 'bag' : 'bag-outline';
@@ -58,7 +58,7 @@ const UserMainTabNavigator = () => {
 
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Payments" component={PaymentsScreen} />
-            <Tab.Screen name="Complaints" component={SearchScreen} />
+            <Tab.Screen name="Complaints" component={ComolaintsScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
     );

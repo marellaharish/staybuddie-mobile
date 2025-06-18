@@ -20,6 +20,8 @@ interface InputProps extends TextInputProps {
     rightElement?: React.ReactNode;
     leftElement?: React.ReactNode;
     isPassword?: boolean;
+    multiline?: boolean;
+    numberOfLines?: number;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -31,7 +33,9 @@ const Input: React.FC<InputProps> = ({
     leftElement,
     onFocus,
     onBlur,
+    multiline = false,
     isPassword = false,
+    numberOfLines = 1,
     ...rest
 }) => {
     const [secureText, setSecureText] = useState<boolean>(isPassword);
@@ -61,9 +65,11 @@ const Input: React.FC<InputProps> = ({
                 <TextInput
                     placeholderTextColor="#888"
                     secureTextEntry={secureText}
-                    style={[styles.input, inputStyle]}
+                    style={[styles.input, inputStyle, multiline && { height: verticalScale(20 * numberOfLines) },]}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
+                    multiline={multiline}
+                    numberOfLines={numberOfLines}
                     {...rest}
 
                 />
@@ -102,6 +108,7 @@ const styles = StyleSheet.create({
         paddingVertical: verticalScale(10),
         color: '#000',
         paddingHorizontal: scale(10),
+        textAlignVertical: 'top',
     },
     error: {
         marginTop: scale(4),
