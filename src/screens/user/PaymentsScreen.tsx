@@ -60,7 +60,6 @@ const PaymentsScreen = () => {
                     <Input
                         placeholder="Enter Month"
                         autoCapitalize="none"
-                        secureTextEntry={true}
                         containerStyle={{ borderRadius: Metrics.radiusMedium, }}
 
                     // error="Invalid email address"
@@ -71,7 +70,6 @@ const PaymentsScreen = () => {
                     <Input
                         placeholder="Enter Year"
                         autoCapitalize="none"
-                        secureTextEntry={true}
                         containerStyle={{ borderRadius: Metrics.radiusMedium, }}
 
                     // error="Invalid email address"
@@ -84,7 +82,6 @@ const PaymentsScreen = () => {
                 <Input
                     placeholder="Enter Year"
                     autoCapitalize="none"
-                    secureTextEntry={true}
                     containerStyle={{ borderRadius: Metrics.radiusMedium, }}
                 />
             </View>
