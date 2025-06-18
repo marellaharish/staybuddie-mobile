@@ -7,16 +7,15 @@ import {
     TextInputProps,
     TextStyle,
     TouchableWithoutFeedback,
-    View,
-    ViewStyle
+    View
 } from 'react-native';
 import { scale, verticalScale } from 'react-native-size-matters';
 import { FontSizes } from '../../constants';
 
 interface InputProps extends TextInputProps {
     error?: string;
-    containerStyle?: ViewStyle;
-    inputStyle?: TextStyle;
+    containerStyle?: object;
+    inputStyle?: object;
     labelStyle?: TextStyle;
     rightElement?: React.ReactNode;
     leftElement?: React.ReactNode;
@@ -56,7 +55,7 @@ const Input: React.FC<InputProps> = ({
 
     return (
         <View style={[styles.container, containerStyle]}>
-            <View style={[styles.inputWrapper, isFocused && styles.inputWrapperFocused]}>
+            <View style={[styles.inputWrapper, isFocused && styles.inputWrapperFocused, containerStyle]}>
                 {leftElement && <View style={styles.sideElement}>{leftElement}</View>}
 
                 <TextInput
@@ -66,6 +65,7 @@ const Input: React.FC<InputProps> = ({
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                     {...rest}
+
                 />
 
                 {rightElement && isPassword && (

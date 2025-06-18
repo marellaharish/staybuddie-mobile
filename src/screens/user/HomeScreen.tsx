@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Colors } from 'constants/Colors';
-import { Bell, Menu } from 'lucide-react-native';
+import { Bed, Bell, CreditCard, Info, MapPin, Menu, Save, User } from 'lucide-react-native';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -81,10 +81,41 @@ const HomeScreen = () => {
                     <View style={{ ...Layouts.row, ...Layouts.spaceBetween }}>
                         <View>
 
-                            <Text>Upcoming Payment</Text>
-                        </View>
-                        <Image source={{ uri: 'https://images.adsttc.com/media/images/5d5d/e03f/284d/d166/2000/08c3/slideshow/A10.jpg' }} style={{ width: 150, height: 100, borderRadius: Metrics.radiusMedium, overflow: 'hidden', marginTop: Metrics.marginMedium }} />
+                            <Text style={[styles.name]}>Upcoming Payment</Text>
+                            <Text numberOfLines={1} style={[styles.address, { width: 200, fontWeight: "normal" }]}>Survey no. 91, Technical Block, Madhava Reddy Colony</Text>
+                            <Text numberOfLines={1} style={[styles.address, { width: 200 }]}>Amount : 5,000/-</Text>
 
+                        </View>
+                        <Image source={{ uri: 'https://t3.ftcdn.net/jpg/05/60/50/16/240_F_560501607_x7crxqBWbmbgK2k8zOL0gICbIbK9hP6y.jpg' }} style={{ width: 150, height: 80, borderRadius: Metrics.radiusMedium, overflow: 'hidden', marginTop: Metrics.marginMedium }} />
+
+                    </View>
+                    <Text style={[styles.name, { fontSize: FontSizes.xLarge, paddingVertical: Metrics.paddingSmall }]}>Quick Actions</Text>
+
+                    <View style={styles.facilitiesRow}>
+                        <View style={styles.facilityItem}>
+                            <Bed size={20} color={colors.gray500} />
+                            <Text style={styles.facilityText}>Book</Text>
+                        </View>
+                        <View style={styles.facilityItem}>
+                            <Save size={20} color={colors.gray500} />
+                            <Text style={styles.facilityText}>Saved</Text>
+                        </View>
+                        <View style={styles.facilityItem}>
+                            <MapPin size={20} color={colors.gray500} />
+                            <Text style={styles.facilityText}>Visits</Text>
+                        </View>
+                        <View style={styles.facilityItem}>
+                            <CreditCard size={20} color={colors.gray500} />
+                            <Text style={styles.facilityText}>Payments</Text>
+                        </View>
+                        <View style={styles.facilityItem}>
+                            <User size={20} color={colors.gray500} />
+                            <Text style={styles.facilityText}>Profile</Text>
+                        </View>
+                        <View style={styles.facilityItem}>
+                            <Info size={20} color={colors.gray500} />
+                            <Text style={styles.facilityText}>Supported</Text>
+                        </View>
                     </View>
 
 
@@ -99,6 +130,8 @@ const styles = StyleSheet.create({
         ...Layouts.flex,
         backgroundColor: colors.white,
         paddingHorizontal: Metrics.paddingMedium,
+        marginBottom: 85,
+        paddingBottom: Metrics.paddingMedium
 
     },
     locationContainer: {
@@ -132,9 +165,10 @@ const styles = StyleSheet.create({
     type: {
         fontSize: FontSizes.small,
         color: colors.gray400,
+        paddingTop: 4
     },
     name: {
-        fontSize: FontSizes.xLarge,
+        fontSize: FontSizes.large,
         fontWeight: '600',
         color: colors.black,
     },
@@ -142,5 +176,28 @@ const styles = StyleSheet.create({
         fontSize: FontSizes.small,
         color: colors.gray600,
         maxWidth: screenWidth * 0.8,
+    },
+    facilitiesRow: {
+        ...Layouts.row,
+        ...Layouts.spaceBetween,
+        flexWrap: 'wrap',
+        marginTop: Metrics.marginMedium,
+
+    },
+    facilityItem: {
+        ...Layouts.row,
+        alignItems: 'center',
+        marginBottom: Metrics.marginMedium,
+        padding: Metrics.paddingMedium,
+        width: '48%',
+        borderWidth: 1,
+        borderColor: colors.gray200,
+        borderRadius: Metrics.radiusMedium,
+    },
+    facilityText: {
+        fontSize: FontSizes.medium,
+        color: colors.black,
+        marginLeft: Metrics.marginMedium,
+        fontWeight: '500',
     },
 })

@@ -7,6 +7,7 @@ import SearchScreen from '../screens/main/SearchScreen';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import HomeScreen from 'src/screens/user/HomeScreen';
+import PaymentsScreen from 'src/screens/user/PaymentsScreen';
 import { MainTabParamList } from './types'; // We will define this in the next step
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -56,7 +57,7 @@ const UserMainTabNavigator = () => {
         >
 
             <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Payments" component={ProfileScreen} />
+            <Tab.Screen name="Payments" component={PaymentsScreen} />
             <Tab.Screen name="Complaints" component={SearchScreen} />
             <Tab.Screen name="Profile" component={ProfileScreen} />
         </Tab.Navigator>
