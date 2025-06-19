@@ -38,3 +38,9 @@ export type UserStackParamList = {
     Terms: undefined;
     About: undefined;
 };
+
+
+export type UserTabParamList = {
+    UserMainTabs: undefined;
+    UserNavigator: undefined;
+};

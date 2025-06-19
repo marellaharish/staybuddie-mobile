@@ -9,11 +9,11 @@ import ComolaintsScreen from 'src/screens/user/ComolaintsScreen';
 import HomeScreen from 'src/screens/user/HomeScreen';
 import PaymentsScreen from 'src/screens/user/PaymentsScreen';
 import UserProfileScreen from 'src/screens/user/UserProfileScreen';
-import { MainTabParamList, UserStackParamList } from './types'; // We will define this in the next step
+import { MainTabParamList, UserTabParamList } from './types'; // We will define this in the next step
 import UserNavigator from './UserNavigator';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
-const Stack = createNativeStackNavigator<UserStackParamList>();
+const Stack = createNativeStackNavigator<UserTabParamList>();
 
 
 const UserTabNavigator = () => {
