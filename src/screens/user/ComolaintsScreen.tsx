@@ -1,9 +1,10 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Colors } from 'constants/Colors';
+import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from 'expo-router';
 import { ArrowLeft, Download } from 'lucide-react-native';
-import { useLayoutEffect } from 'react';
-import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useLayoutEffect, useState } from 'react';
+import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Button from 'src/components/common/Button';
 import Input from 'src/components/common/Input';
 import { colors, FontSizes, Layouts, Metrics } from 'src/constants';
@@ -48,6 +49,35 @@ const ComolaintsScreen = () => {
             </TouchableOpacity>
         </View>
     );
+
+
+    const [images, setImages] = useState<string[]>([]);
+
+    const pickImage = async () => {
+        // Ask for permission
+        const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (!permissionResult.granted) {
+            alert("Permission to access gallery is required!");
+            return;
+        }
+
+        // Launch image picker
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsMultipleSelection: true,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            const uris = result.assets.map(asset => asset.uri);
+            setImages(uris);
+        }
+
+    };
+
+
     return (
         <ScrollView style={[styles.container]}>
 
@@ -87,6 +117,20 @@ const ComolaintsScreen = () => {
                     autoCapitalize="none"
                     containerStyle={{ borderRadius: Metrics.radiusMedium, }}
                 />
+            </View>
+
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                <Button title="Upload Image(Optional)" onPress={pickImage} variant='outline' />
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                    {images.map((uri, index) => (
+                        <Image
+                            key={index}
+                            source={{ uri }}
+                            style={{ width: 100, height: 100, margin: 5 }}
+                        />
+                    ))}
+                </View>
+
             </View>
 
             <Button
@@ -154,4 +198,3 @@ const styles = StyleSheet.create({
         color: colors.gray600,
     },
 })
-
