@@ -89,7 +89,7 @@ const userOptions = [
 const UserProfileScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
     const renderItem = ({ item }: { item: typeof userOptions[0] }) => (
-        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate(item.route)}>
+        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('UserNavigator', { screen: item.route })}>
             <View style={[Layouts.row, styles.icon]}>{item.icon}</View>
             <View>
                 <Text style={styles.label}>{item.label}</Text>
@@ -103,7 +103,7 @@ const UserProfileScreen = () => {
         <ScrollView style={styles.container}>
             <View style={styles.profileHeader}>
                 <Image
-                    source={{ uri: 'https://randomuser.me/api/portraits/women/1.jpg' }}
+                    source={{ uri: 'https://randomuser.me/api/portraits/women/5.jpg' }}
                     style={styles.avatar}
                 />
                 <View>

@@ -3,18 +3,21 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
 
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ComolaintsScreen from 'src/screens/user/ComolaintsScreen';
 import HomeScreen from 'src/screens/user/HomeScreen';
 import PaymentsScreen from 'src/screens/user/PaymentsScreen';
 import UserProfileScreen from 'src/screens/user/UserProfileScreen';
-import { MainTabParamList } from './types';
+import { MainTabParamList, UserStackParamList } from './types'; // We will define this in the next step
+import UserNavigator from './UserNavigator';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
+const Stack = createNativeStackNavigator<UserStackParamList>();
 
-const UserMainTabNavigator = () => {
+
+const UserTabNavigator = () => {
     const insets = useSafeAreaInsets();
-
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -61,6 +64,26 @@ const UserMainTabNavigator = () => {
             <Tab.Screen name="Complaints" component={ComolaintsScreen} />
             <Tab.Screen name="Profile" component={UserProfileScreen} />
         </Tab.Navigator>
+    );
+
+}
+
+
+
+const UserMainTabNavigator = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="UserMainTabs"
+                component={UserTabNavigator}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="UserNavigator"
+                component={UserNavigator}
+                options={{ headerShown: false }}
+            />
+        </Stack.Navigator>
     );
 };
 

@@ -25,3 +25,16 @@ export type HomeStackParamList = {
     HostelDetails: { item: any };
     Filters: undefined;
 };
+
+export type UserStackParamList = {
+    EditProfile: undefined;
+    Language: undefined;
+    FAQ: undefined;
+    ShareApp: undefined;
+    RateUs: undefined;
+    Help: undefined;
+    PrivacyPolicy: undefined;
+    Feedback: undefined;
+    Terms: undefined;
+    About: undefined;
+};
