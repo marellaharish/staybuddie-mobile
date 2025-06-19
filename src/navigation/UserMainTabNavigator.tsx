@@ -2,13 +2,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 
-import ProfileScreen from '../screens/main/ProfileScreen';
 
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ComolaintsScreen from 'src/screens/user/ComolaintsScreen';
 import HomeScreen from 'src/screens/user/HomeScreen';
 import PaymentsScreen from 'src/screens/user/PaymentsScreen';
-import { MainTabParamList } from './types'; // We will define this in the next step
+import UserProfileScreen from 'src/screens/user/UserProfileScreen';
+import { MainTabParamList } from './types';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
@@ -59,7 +59,7 @@ const UserMainTabNavigator = () => {
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Payments" component={PaymentsScreen} />
             <Tab.Screen name="Complaints" component={ComolaintsScreen} />
-            <Tab.Screen name="Profile" component={ProfileScreen} />
+            <Tab.Screen name="Profile" component={UserProfileScreen} />
         </Tab.Navigator>
     );
 };
