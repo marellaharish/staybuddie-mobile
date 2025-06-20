@@ -14,6 +14,7 @@ type Props = {
     maximumDate?: Date;
     mode?: 'date' | 'time' | 'datetime';
     disabled?: boolean;
+    leftElement?: React.ReactNode;
 };
 
 const DatePickerInput: React.FC<Props> = ({
@@ -25,6 +26,7 @@ const DatePickerInput: React.FC<Props> = ({
     maximumDate = new Date(),
     mode = 'date',
     disabled = false,
+    leftElement,
 }) => {
     const [visible, setVisible] = useState(false);
 
@@ -45,6 +47,7 @@ const DatePickerInput: React.FC<Props> = ({
                     editable={false}
                     pointerEvents="none"
                     containerStyle={styles.input}
+                    leftElement={leftElement}
                 />
             </TouchableOpacity>
 

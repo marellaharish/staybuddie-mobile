@@ -4,7 +4,7 @@ import { useNavigation } from 'expo-router';
 import React, { useLayoutEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { ArrowLeft, Pencil } from 'lucide-react-native';
+import { ArrowLeft, Calendar, Pencil, PersonStanding, Phone, User } from 'lucide-react-native';
 import Button from 'src/components/common/Button';
 import DatePickerInput from 'src/components/common/DatePickerInput';
 import Input from 'src/components/common/Input';
@@ -58,19 +58,27 @@ const EditProfileScreen = () => {
 
       <View style={styles.form}>
         <Text style={styles.inputLabel}>Name</Text>
-        <Input placeholder="Enter your name" containerStyle={styles.input} />
+        <Input placeholder="Enter your name" containerStyle={styles.input}
+          leftElement={<User size={20} color="#555" />}
+        />
 
         <Text style={styles.inputLabel}>Date of Birth</Text>
         <DatePickerInput
           placeholder="DD/MM/YYYY"
-          onChange={(date) => setDob(date as unknown as Date)} />
+          onChange={(date) => setDob(date as unknown as Date)}
+          leftElement={<Calendar size={20} color="#555" />}
+        />
         {/* <Input placeholder="DD/MM/YYYY" containerStyle={styles.input} /> */}
 
         <Text style={styles.inputLabel}>Gender</Text>
-        <Input placeholder="Male / Female / Other" containerStyle={styles.input} />
+        <Input placeholder="Male / Female / Other" containerStyle={styles.input}
+          leftElement={<PersonStanding size={20} color="#555" />}
+        />
 
         <Text style={styles.inputLabel}>Phone Number</Text>
-        <Input disabled placeholder="Enter phone number" containerStyle={styles.input} value='123456789' />
+        <Input disabled placeholder="Enter phone number" containerStyle={styles.input} value='123456789'
+          leftElement={<Phone size={20} color="#555" />}
+        />
 
         <Text style={styles.inputLabel}>Designation</Text>
         <Input placeholder="Enter designation" containerStyle={styles.input} />
