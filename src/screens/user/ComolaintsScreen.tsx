@@ -4,13 +4,16 @@ import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from 'expo-router';
 import { ArrowLeft } from 'lucide-react-native';
 import { useLayoutEffect, useState } from 'react';
-import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, LogBox, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Button from 'src/components/common/Button';
 import Input from 'src/components/common/Input';
 import SearchInput from 'src/components/common/SearchInput';
 import { colors, FontSizes, Layouts, Metrics } from 'src/constants';
 import { HomeStackParamList } from 'src/navigation/types';
 
+LogBox.ignoreLogs([
+    'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation',
+]);
 const paymentData = [
     {
         month: 'Water Leakage',

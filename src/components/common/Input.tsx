@@ -13,6 +13,7 @@ import { scale, verticalScale } from 'react-native-size-matters';
 import { FontSizes } from '../../constants';
 
 interface InputProps extends TextInputProps {
+    disabled?: boolean;
     error?: string;
     containerStyle?: object;
     inputStyle?: object;
@@ -22,6 +23,7 @@ interface InputProps extends TextInputProps {
     isPassword?: boolean;
     multiline?: boolean;
     numberOfLines?: number;
+    value?: string; // Add value prop
 }
 
 const Input: React.FC<InputProps> = ({
@@ -35,7 +37,9 @@ const Input: React.FC<InputProps> = ({
     onBlur,
     multiline = false,
     isPassword = false,
+    disabled = false,
     numberOfLines = 1,
+    value,
     ...rest
 }) => {
     const [secureText, setSecureText] = useState<boolean>(isPassword);
@@ -59,17 +63,20 @@ const Input: React.FC<InputProps> = ({
 
     return (
         <View style={[styles.container, containerStyle]}>
-            <View style={[styles.inputWrapper, isFocused && styles.inputWrapperFocused, containerStyle]}>
+            <View style={[styles.inputWrapper, isFocused && styles.inputWrapperFocused, containerStyle, disabled && styles.disabledInput]}>
                 {leftElement && <View style={styles.sideElement}>{leftElement}</View>}
 
                 <TextInput
                     placeholderTextColor="#888"
                     secureTextEntry={secureText}
-                    style={[styles.input, inputStyle, multiline && { height: verticalScale(20 * numberOfLines) },]}
+                    style={[styles.input, inputStyle, multiline && { height: verticalScale(20 * numberOfLines) }, disabled && styles.disabledInputText]}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                     multiline={multiline}
                     numberOfLines={numberOfLines}
+                    editable={!disabled}
+                    selectTextOnFocus={!disabled}
+                    value={value}
                     {...rest}
 
                 />
@@ -118,6 +125,13 @@ const styles = StyleSheet.create({
     sideElement: {
         marginHorizontal: scale(4),
     },
+    disabledInput: {
+        backgroundColor: '#f2f2f2',
+    },
+    disabledInputText: {
+        color: '#999',
+    }
+
 });
 
 export default Input;

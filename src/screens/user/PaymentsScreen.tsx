@@ -3,12 +3,14 @@ import { Colors } from 'constants/Colors';
 import { useNavigation } from 'expo-router';
 import { ArrowLeft, Download } from 'lucide-react-native';
 import { useLayoutEffect } from 'react';
-import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, LogBox, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Button from 'src/components/common/Button';
 import Input from 'src/components/common/Input';
 import { colors, FontSizes, Layouts, Metrics } from 'src/constants';
 import { HomeStackParamList } from 'src/navigation/types';
-
+LogBox.ignoreLogs([
+    'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation',
+]);
 const paymentData = [
     { month: 'October 2023', status: 'Accepted', date: '2023-10-15', amount: '₹1,200' },
     { month: 'September 2023', status: 'Pending', date: '2023-09-15', amount: '₹1,200' },

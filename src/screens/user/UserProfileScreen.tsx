@@ -1,6 +1,7 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from 'expo-router';
 import {
+    ArrowLeft,
     Headset,
     Info,
     Languages,
@@ -12,9 +13,13 @@ import {
     ShieldCheck,
     Star
 } from 'lucide-react-native';
-import React from 'react';
-import { FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useLayoutEffect } from 'react';
+import { FlatList, Image, LogBox, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors, FontSizes, Layouts, Metrics } from 'src/constants';
+
+LogBox.ignoreLogs([
+    'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation',
+]);
 
 const userOptions = [
     {
@@ -88,6 +93,21 @@ const userOptions = [
 
 const UserProfileScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerTitle: `User Settings`,
+            headerTitleAlign: 'center', // This centers the title
+            headerShadowVisible: false,
+            headerLeft: () => (
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: 15 }}>
+                    <ArrowLeft size={24} color={colors.black} />
+                </TouchableOpacity>
+            ),
+        });
+    }, [navigation]);
+
+
     const renderItem = ({ item }: { item: typeof userOptions[0] }) => (
         <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('UserNavigator', { screen: item.route })}>
             <View style={[Layouts.row, styles.icon]}>{item.icon}</View>
@@ -174,7 +194,6 @@ const styles = StyleSheet.create({
         maxWidth: '90%',
     },
     icon: {
-        backgroundColor: colors.gray100,
         borderRadius: Metrics.radiusMedium,
         alignItems: 'center',
         justifyContent: 'center',

@@ -23,42 +23,53 @@ const UserNavigator = () => {
                 <Stack.Screen
                     name="EditProfile"
                     component={EditProfileScreen}
+
+                    options={{ headerShadowVisible: false, headerTitleAlign: 'center' }}
                 />
                 <Stack.Screen
                     name="Language"
                     component={LanguageScreen}
+                    options={{ headerShadowVisible: false, headerTitleAlign: 'center' }}
                 />
                 <Stack.Screen
                     name="FAQ"
                     component={FAQScreen}
+                    options={{ headerShadowVisible: false, headerTitleAlign: 'center' }}
                 />
                 <Stack.Screen
                     name="ShareApp"
                     component={ShareAppScreen}
+                    options={{ headerShadowVisible: false, headerTitleAlign: 'center' }}
                 />
                 <Stack.Screen
                     name="RateUs"
                     component={RateUsScreen}
+                    options={{ headerShadowVisible: false, headerTitleAlign: 'center' }}
                 />
                 <Stack.Screen
                     name="Help"
                     component={HelpScreen}
+                    options={{ headerShadowVisible: false, headerTitleAlign: 'center' }}
                 />
                 <Stack.Screen
                     name="PrivacyPolicy"
                     component={PrivacyPolicyScreen}
+                    options={{ headerShadowVisible: false, headerTitleAlign: 'center' }}
                 />
                 <Stack.Screen
                     name="Feedback"
                     component={FeedbackScreen}
+                    options={{ headerShadowVisible: false, headerTitleAlign: 'center' }}
                 />
                 <Stack.Screen
                     name="Terms"
                     component={TermsScreen}
+                    options={{ headerShadowVisible: false, headerTitleAlign: 'center' }}
                 />
                 <Stack.Screen
                     name="About"
                     component={AboutScreen}
+                    options={{ headerShadowVisible: false, headerTitleAlign: 'center' }}
                 />
             </Stack.Navigator>
         </>
