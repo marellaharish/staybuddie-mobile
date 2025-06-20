@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     marginBottom: Metrics.marginLarge,
   },
   inputLabel: {
-    fontSize: FontSizes.small,
+    fontSize: FontSizes.medium,
     color: colors.gray600,
     fontWeight: '500',
     marginBottom: 4,
