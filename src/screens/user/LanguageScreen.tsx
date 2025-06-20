@@ -1,7 +1,8 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from 'expo-router';
 import {
-  ArrowLeft
+  ArrowLeft,
+  Check
 } from 'lucide-react-native';
 import React, { useLayoutEffect } from 'react';
 import { FlatList, LogBox, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -76,7 +77,12 @@ const LanguageScreen = () => {
   const renderItem = ({ item }: { item: typeof userOptions[0] }) => (
     <TouchableOpacity style={styles.item} onPress={() => console.log(item.label + '  Selected')}>
       <View style={[styles.icon]}><Text style={styles.text}>{item.text}</Text></View>
-      <Text style={styles.label}>{item.label}</Text>
+      <View style={[Layouts.row, Layouts.spaceBetween, { width: '80%' }]}>
+        <Text style={styles.label}>{item.label}</Text>
+        {item.label === 'English' &&
+          <Check />
+        }
+      </View>
     </TouchableOpacity>
   );
 
