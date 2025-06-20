@@ -2,12 +2,12 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from 'expo-router';
 import {
     ArrowLeft,
+    CircleX,
     Headset,
     Info,
     Languages,
     LogOut,
     MessageCircleQuestion,
-    MessageSquare,
     Pencil,
     ScrollText,
     Share2,
@@ -66,8 +66,8 @@ const userOptions = [
         description: 'Review the app’s privacy policy and data handling practices.'
     },
     {
-        icon: <MessageSquare size={20} color={colors.gray700} />,
-        label: 'Feedback',
+        icon: <CircleX size={20} color={colors.gray700} />,
+        label: 'Delete My Account',
         route: 'Feedback',
         description: 'Provide your feedback to help improve the app.'
     },
