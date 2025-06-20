@@ -6,7 +6,8 @@ import {
     Info,
     Languages,
     LogOut,
-    MessageCircleQuestion, MessageSquare,
+    MessageCircleQuestion,
+    MessageSquare,
     Pencil,
     ScrollText,
     Share2,
@@ -14,7 +15,7 @@ import {
     Star
 } from 'lucide-react-native';
 import React, { useLayoutEffect } from 'react';
-import { FlatList, Image, LogBox, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, LogBox, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors, FontSizes, Layouts, Metrics } from 'src/constants';
 
 LogBox.ignoreLogs([
@@ -90,7 +91,6 @@ const userOptions = [
     },
 ];
 
-
 const UserProfileScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
@@ -107,15 +107,37 @@ const UserProfileScreen = () => {
         });
     }, [navigation]);
 
+    // Function to trigger sharing dialog
+    const onShare = async () => {
+        try {
+            await Share.share({
+                message: 'Check out this amazing app!',
+            });
+        } catch (error) {
+            console.error('Error sharing app:', error);
+        }
+    };
 
     const renderItem = ({ item }: { item: typeof userOptions[0] }) => (
-        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('UserNavigator', { screen: item.route })}>
+        <TouchableOpacity
+            style={styles.item}
+            onPress={() => {
+                // If it's the "Share App" option, trigger share dialog
+                if (item.label === 'Share App') {
+                    onShare();
+                } else {
+                    // Otherwise, navigate to the appropriate screen
+                    navigation.navigate('UserNavigator', { screen: item.route });
+                }
+            }}
+        >
             <View style={[Layouts.row, styles.icon]}>{item.icon}</View>
             <View>
                 <Text style={styles.label}>{item.label}</Text>
-                <Text style={styles.labelSmall} numberOfLines={1} ellipsizeMode="tail" >{item.description}</Text>
+                <Text style={styles.labelSmall} numberOfLines={1} ellipsizeMode="tail">
+                    {item.description}
+                </Text>
             </View>
-
         </TouchableOpacity>
     );
 
@@ -151,7 +173,6 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         padding: Metrics.marginMedium,
         marginBottom: 70,
-
     },
     profileHeader: {
         ...Layouts.row,

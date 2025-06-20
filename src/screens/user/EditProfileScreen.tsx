@@ -52,8 +52,8 @@ const EditProfileScreen = () => {
             <Pencil size={16} color={colors.white} />
           </View>
         </TouchableOpacity>
-        <Text style={styles.name}>Sophia Patel</Text>
-        <Text style={styles.username}>@sophiapatel</Text>
+        <Text style={styles.name}>Harish Marella</Text>
+        <Text style={styles.username}>@marellaharish9</Text>
       </View>
 
       <View style={styles.form}>

@@ -88,8 +88,7 @@ const styles = StyleSheet.create({
   container: {
     padding: Metrics.marginMedium,
     backgroundColor: colors.white,
-    ...Layouts.flex,
-    marginBottom: 40
+    ...Layouts.flex, 
   },
   section: {
     marginTop: Metrics.marginLarge,
