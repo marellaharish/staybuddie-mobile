@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ComolaintsScreen from 'src/screens/user/ComolaintsScreen';
 import HomeScreen from 'src/screens/user/HomeScreen';
+import NotificationsScreen from 'src/screens/user/NotificationsScreen';
 import PaymentsScreen from 'src/screens/user/PaymentsScreen';
 import UserProfileScreen from 'src/screens/user/UserProfileScreen';
 import { MainTabParamList, UserTabParamList } from './types'; // We will define this in the next step
@@ -83,6 +84,11 @@ const UserMainTabNavigator = () => {
                 component={UserNavigator}
                 options={{ headerShown: false }}
             />
+                            <Stack.Screen
+                    name="Notifications"
+                    component={NotificationsScreen}
+                    options={{ headerShadowVisible: false, headerTitleAlign: 'center' }}
+                />
         </Stack.Navigator>
     );
 };

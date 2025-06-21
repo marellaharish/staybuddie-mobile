@@ -4,7 +4,7 @@ import { useNavigation } from 'expo-router';
 import React, { useLayoutEffect, useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { ArrowLeft, Calendar, Pencil, PersonStanding, Phone, User } from 'lucide-react-native';
+import { ArrowLeft, Bike, Calendar, IdCardLanyard, Pencil, PersonStanding, Phone, Shield, User } from 'lucide-react-native';
 import Button from 'src/components/common/Button';
 import DatePickerInput from 'src/components/common/DatePickerInput';
 import Input from 'src/components/common/Input';
@@ -40,6 +40,14 @@ const EditProfileScreen = () => {
     }
   };
 
+  const [loading, setLoading] = useState(false);
+
+  const handlePress = async () => {
+    setLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 2000)); 
+    console.log("Button action done");
+    setLoading(false);
+  };
   return (
     <ScrollView style={styles.container}>
       <View style={styles.profileWrapper}>
@@ -78,26 +86,38 @@ const EditProfileScreen = () => {
         <Text style={styles.inputLabel}>Phone Number</Text>
         <Input disabled placeholder="Enter phone number" containerStyle={styles.input} value='123456789'
           leftElement={<Phone size={20} color="#555" />}
-        />
+          />
 
         <Text style={styles.inputLabel}>Designation</Text>
-        <Input placeholder="Enter designation" containerStyle={styles.input} />
+        <Input placeholder="Enter designation" containerStyle={styles.input}
+          leftElement={<IdCardLanyard size={20} color="#555" />}
+          />
 
         <Text style={styles.inputLabel}>Vehicle Number (Optional)</Text>
-        <Input placeholder="Enter vehicle number" containerStyle={styles.input} />
+        <Input placeholder="Enter vehicle number" containerStyle={styles.input}
+          leftElement={<Bike size={20} color="#555" />}
+        />
 
         <Text style={styles.inputLabel}>Guardian Name</Text>
-        <Input placeholder="Enter guardian name" containerStyle={styles.input} />
+        <Input placeholder="Enter guardian name" containerStyle={styles.input}
+          leftElement={<Shield  size={20} color="#555" />}
+        />
 
         <Text style={styles.inputLabel}>Guardian Phone Number</Text>
-        <Input placeholder="Enter guardian's phone number" containerStyle={[styles.input, { marginBottom: 0 }]} />
+        <Input placeholder="Enter guardian's phone number" containerStyle={[styles.input, { marginBottom: 0 }]}
+          leftElement={<Phone size={20} color="#555" />}
+          value='9876543210'
+        
+        />
       </View>
 
       <Button
         title="Save"
-        onPress={() => console.log('Saved')}
+        onPress={handlePress}
         variant="primary"
         style={styles.button}
+        loading={loading}
+        disabled={loading} // Optional; already handled in Button
       />
     </ScrollView>
   );

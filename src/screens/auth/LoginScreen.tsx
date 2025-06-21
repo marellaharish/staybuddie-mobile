@@ -7,9 +7,25 @@ import { scale } from 'react-native-size-matters'
 import Button from 'src/components/common/Button'
 import Input from 'src/components/common/Input'
 import { FontSizes, Metrics } from 'src/constants'
+import { useNavigationFlow } from 'src/navigation/NavigationContext'
 import { navigate } from 'src/navigation/navigationService'
 const LoginScreen = () => {
-    const [rememberMe, setRememberMe] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false); 
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
+    const { goToMain } = useNavigationFlow();
+
+    const handleLogin = () => {
+        if (!phone.trim() || !password.trim()) {
+            setError('Please enter phone and password');
+            return;
+        }
+
+        setError('');
+        goToMain(); // In future, replace with async API + error handling
+    };
     return (
         <>
             <SafeAreaView style={[styles.container,]}>
@@ -64,7 +80,7 @@ const LoginScreen = () => {
 
                         <Button
                             title="Login"
-                            onPress={() => console.log('Booking...')}
+                            onPress={goToMain}
                             variant="primary"
                             loading={false}
                         />

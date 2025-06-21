@@ -54,9 +54,9 @@ const HomeScreen = () => {
             headerShadowVisible: false,
             headerRight: () => (
                 <>
-                    <TouchableOpacity onPress={() => console.log('Notifications')} style={{ marginRight: Metrics.paddingMedium }}>
-                        <Bell size={24} color={Colors.light.text} />
-                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('Notifications')} style={{ marginRight: 16 }}>
+                            <Bell size={24} color={Colors.light.text} />
+                        </TouchableOpacity>
                     <TouchableOpacity onPress={() => console.log('Notifications')} style={{ marginRight: Metrics.paddingMedium }}>
                         <Menu size={24} color={Colors.light.text} />
                     </TouchableOpacity>

@@ -43,4 +43,5 @@ export type UserStackParamList = {
 export type UserTabParamList = {
     UserMainTabs: undefined;
     UserNavigator: undefined;
+    Notifications: undefined;
 };

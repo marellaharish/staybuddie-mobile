@@ -15,7 +15,7 @@ import {
     Star
 } from 'lucide-react-native';
 import React, { useLayoutEffect } from 'react';
-import { FlatList, Image, LogBox, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, Image, LogBox, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colors, FontSizes, Layouts, Metrics } from 'src/constants';
 
 LogBox.ignoreLogs([
@@ -68,7 +68,7 @@ const userOptions = [
     {
         icon: <CircleX size={20} color={colors.gray700} />,
         label: 'Delete My Account',
-        route: 'Feedback',
+        route: 'DeleteAccount',
         description: 'Provide your feedback to help improve the app.'
     },
     {
@@ -117,16 +117,63 @@ const UserProfileScreen = () => {
             console.error('Error sharing app:', error);
         }
     };
+ 
+    const onLogout = () => { 
+        Alert.alert(
+            "Confirm Logout",
+            "Are you sure you want to log out?",
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Deletion cancelled"),
+                style: "cancel"
+              },
+              {
+                text: "Logout",
+                onPress: () => {
+                  console.log("Account logged out");
+                  // Add your deletion logic here (e.g., API call)
+                },
+                style: "destructive"
+              }
+            ],
+            { cancelable: false }
+          );
+    };
 
     const renderItem = ({ item }: { item: typeof userOptions[0] }) => (
         <TouchableOpacity
             style={styles.item}
-            onPress={() => {
-                // If it's the "Share App" option, trigger share dialog
+            onPress={() => { 
                 if (item.label === 'Share App') {
                     onShare();
-                } else {
-                    // Otherwise, navigate to the appropriate screen
+                } else if (item.label === 'Delete My Account') { 
+                    Alert.alert(
+                        "Confirm Deletion",
+                        "Are you sure you want to delete your account? This action cannot be undone.",
+                        [
+                          {
+                            text: "Cancel",
+                            onPress: () => console.log("Deletion cancelled"),
+                            style: "cancel"
+                          },
+                          {
+                            text: "Delete",
+                            onPress: () => {
+                              console.log("Account deleted");
+                              // Add your deletion logic here (e.g., API call)
+                            },
+                            style: "destructive"
+                          }
+                        ],
+                        { cancelable: false }
+                      );
+                }
+                
+                else if (item.label === 'Logout') { 
+                    onLogout();
+                }
+                else { 
                     navigation.navigate('UserNavigator', { screen: item.route });
                 }
             }}

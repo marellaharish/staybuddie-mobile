@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Colors } from 'constants/Colors';
+import { LogIn } from 'lucide-react-native';
 import { useLayoutEffect, useRef, useState } from 'react';
 import { Dimensions, FlatList, Image, ImageBackground, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -11,6 +12,7 @@ import BottomSheetWrapper, { BottomSheetRef } from 'src/components/common/Bottom
 import Button from 'src/components/common/Button';
 import InfoCard from 'src/components/common/InfoCard';
 import { colors, FontSizes, Metrics } from 'src/constants';
+import { useNavigationFlow } from 'src/navigation/NavigationContext';
 import { HomeStackParamList } from 'src/navigation/types';
 
 const LandingScreen = () => {
@@ -30,7 +32,12 @@ const LandingScreen = () => {
     const handleCityPress = (city: string): void => {
         navigation.navigate('HostelsList', { city: city });
     };
+    const { goToAuth } = useNavigationFlow();
 
+    const handleLogin = () => {
+        // validate inputs...
+        goToAuth(); // Switch to authenticated tab navigator
+    };
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -52,9 +59,9 @@ const LandingScreen = () => {
             ),
             headerTitle: '',
             headerRight: () => (
-                <TouchableOpacity onPress={() => console.log('Profile')}>
-                    <Image source={{ uri: 'https://lh3.googleusercontent.com/-cU6G9HYrUFQ/AAAAAAAAAAI/AAAAAAAAAAA/ALKGfklCgnNYx1TBn8-2QVuuFWWmArXqSg/photo.jpg?sz=46' }} style={{ width: 40, height: 40, borderRadius: 20, }} />
-                    {/* <Ionicons name="menu" size={24} color={Colors.light.text} /> */}
+                <TouchableOpacity onPress={handleLogin}>
+                    {/* <Image source={{ uri: 'https://lh3.googleusercontent.com/-cU6G9HYrUFQ/AAAAAAAAAAI/AAAAAAAAAAA/ALKGfklCgnNYx1TBn8-2QVuuFWWmArXqSg/photo.jpg?sz=46' }} style={{ width: 40, height: 40, borderRadius: 20, }} /> */}
+                    <LogIn size={24} color={Colors.light.text} />
                 </TouchableOpacity>
             )
         });
@@ -119,7 +126,6 @@ const LandingScreen = () => {
 
                     <BottomSheetWrapper
                         ref={sheetRef}
-                        defaultOpen={true} // 👈 Will auto-open on mount
                         snapPoints={['25%', '50%']}
                         context={
                             <View>
