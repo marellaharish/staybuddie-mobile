@@ -1,12 +1,13 @@
 // src/navigation/NavigationContext.tsx
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
-type ScreenFlow = 'home' | 'auth' | 'main';
+type ScreenFlow = 'home' | 'auth' | 'main' | 'adminAuth';
 
 interface NavigationContextType {
     flow: ScreenFlow;
     goToHome: () => void;
     goToAuth: () => void;
+    goToAdminAuth: () => void;
     goToMain: () => void;
 }
 
@@ -21,6 +22,7 @@ export const NavigationProvider = ({ children }: { children: ReactNode }) => {
                 flow,
                 goToHome: () => setFlow('home'),
                 goToAuth: () => setFlow('auth'),
+                goToAdminAuth: () => setFlow('adminAuth'),
                 goToMain: () => setFlow('main'),
             }}
         >

@@ -9,13 +9,13 @@ import Input from 'src/components/common/Input'
 import { FontSizes, Metrics } from 'src/constants'
 import { useNavigationFlow } from 'src/navigation/NavigationContext'
 import { navigate } from 'src/navigation/navigationService'
-const LoginScreen = () => {
+const AdminLoginScreen = () => {
     const [rememberMe, setRememberMe] = useState(false);
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const { goToMain, goToAdminAuth } = useNavigationFlow();
+    const { goToAuth } = useNavigationFlow();
 
     const handleLogin = () => {
         if (!phone.trim() || !password.trim()) {
@@ -40,7 +40,7 @@ const LoginScreen = () => {
                     <View style={[styles.content]}>
 
                         <Text style={[styles.title]}>Welcome</Text>
-                        <Text style={[styles.title]}>back!</Text>
+                        <Text style={[styles.title]}>back! Admin</Text>
                         <Text style={[styles.subtitle]}>Sign in to access your package history and get real-time updates on all your data</Text>
                         <View style={styles.inputContainer}>
                             <Input
@@ -72,7 +72,7 @@ const LoginScreen = () => {
                                 <Text style={styles.checkboxLabel}>Remember me</Text>
                             </View>
 
-                            <Pressable onPress={goToAdminAuth}>
+                            <Pressable onPress={goToAuth}>
                                 <Text style={styles.forgotPassword}>Forgot Password?</Text>
                             </Pressable>
                         </View>
@@ -80,10 +80,10 @@ const LoginScreen = () => {
 
                         <Button
                             title="Login"
-                            onPress={goToMain}
                             variant="primary"
                             loading={false}
                         />
+
                         <View style={styles.footer}>
                             <Text style={styles.footerText}>
                                 Don’t have an account?
@@ -103,7 +103,7 @@ const LoginScreen = () => {
         </>
     )
 }
-export default LoginScreen
+export default AdminLoginScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,

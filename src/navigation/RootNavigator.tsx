@@ -1,6 +1,7 @@
 // src/navigation/RootNavigator.tsx
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import AdminAuthNavigator from './AdminAuthNavigator';
 import AuthNavigator from './AuthNavigator';
 import HomeNavigator from './HomeNavigator';
 import { useNavigationFlow } from './NavigationContext';
@@ -18,6 +19,9 @@ const RootNavigator = () => {
             )}
             {flow === 'auth' && (
                 <Stack.Screen name="AuthFlow" component={AuthNavigator} />
+            )}
+            {flow === 'adminAuth' && (
+                <Stack.Screen name="AuthFlow" component={AdminAuthNavigator} />
             )}
             {flow === 'main' && (
                 <Stack.Screen name="MainApp" component={UserMainTabNavigator} />

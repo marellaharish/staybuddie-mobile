@@ -102,7 +102,7 @@ export default HostelsListScreen
 const styles = StyleSheet.create({
     container: {
         ...Layouts.flex,
-        marginBottom: Metrics.marginXXLarge,
+
     },
 
 })
