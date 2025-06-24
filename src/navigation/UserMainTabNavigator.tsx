@@ -5,7 +5,7 @@ import React from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ComolaintsScreen from 'src/screens/user/ComolaintsScreen';
+import ComplaintsScreen from 'src/screens/user/ComplaintsScreen';
 import HomeScreen from 'src/screens/user/HomeScreen';
 import NotificationsScreen from 'src/screens/user/NotificationsScreen';
 import PaymentsScreen from 'src/screens/user/PaymentsScreen';
@@ -62,7 +62,7 @@ const UserTabNavigator = () => {
 
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Payments" component={PaymentsScreen} />
-            <Tab.Screen name="Complaints" component={ComolaintsScreen} />
+            <Tab.Screen name="Complaints" component={ComplaintsScreen} />
             <Tab.Screen name="Profile" component={UserProfileScreen} />
         </Tab.Navigator>
     );
