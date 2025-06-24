@@ -74,7 +74,7 @@ const paymentData = [
 ];
 
 
-const ComolaintsScreen = () => {
+const ComplaintsScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<HomeStackParamList>>();
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -238,7 +238,7 @@ const ComolaintsScreen = () => {
         </ScrollView>
     )
 }
-export default ComolaintsScreen
+export default ComplaintsScreen
 const styles = StyleSheet.create({
     container: {
         ...Layouts.flex,
