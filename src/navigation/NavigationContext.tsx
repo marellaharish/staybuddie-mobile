@@ -2,7 +2,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
-type ScreenFlow = 'home' | 'auth' | 'main' | 'adminAuth';
+type ScreenFlow = 'home' | 'auth' | 'main' | 'adminAuth' | 'admin';
 
 interface NavigationContextType {
     flow: ScreenFlow;
@@ -10,6 +10,7 @@ interface NavigationContextType {
     goToAuth: () => void;
     goToAdminAuth: () => void;
     goToMain: () => void;
+    goToAdmin: () => void;
 }
 
 const NavigationContext = createContext<NavigationContextType | undefined>(undefined);
@@ -17,14 +18,26 @@ const NavigationContext = createContext<NavigationContextType | undefined>(undef
 const STORAGE_KEY = 'appScreenFlow';
 
 export const NavigationProvider = ({ children }: { children: ReactNode }) => {
-    const [flow, setFlow] = useState<ScreenFlow>('home'); // default to 'home'
+    const [flow, setFlow] = useState<ScreenFlow>('admin'); // default to 'home'
     const [isLoaded, setIsLoaded] = useState(false);
 
+
+// const clearStorage = async () => {
+//     try {
+//       await AsyncStorage.clear();
+//       console.log('AsyncStorage cleared!');
+//     } catch (e) {
+//       console.error('Failed to clear AsyncStorage:', e);
+//     }
+// };
+    
     useEffect(() => {
+        // clearStorage();
         const loadStoredFlow = async () => {
             try {
                 const stored = await AsyncStorage.getItem(STORAGE_KEY);
-                if (stored === 'home' || stored === 'auth' || stored === 'main') {
+                console.log(stored, "stored flow");
+                if (stored === 'home' || stored === 'auth' || stored === 'main' || stored === 'adminAuth' || stored === 'admin') {
                     setFlow(stored);
                 }
             } catch (e) {
@@ -53,6 +66,7 @@ export const NavigationProvider = ({ children }: { children: ReactNode }) => {
                 goToAuth: () => setFlow('auth'),
                 goToAdminAuth: () => setFlow('adminAuth'),
                 goToMain: () => setFlow('main'),
+                goToAdmin: () => setFlow('admin'),
             }}
         >
             {children}

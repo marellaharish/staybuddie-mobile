@@ -2,6 +2,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import AdminAuthNavigator from './AdminAuthNavigator';
+import AdminMainTabNavigator from './AdminMainTabNavigator';
 import AuthNavigator from './AuthNavigator';
 import HomeNavigator from './HomeNavigator';
 import { useNavigationFlow } from './NavigationContext';
@@ -25,6 +26,9 @@ const RootNavigator = () => {
             )}
             {flow === 'main' && (
                 <Stack.Screen name="MainApp" component={UserMainTabNavigator} />
+            )}
+            {flow === 'admin' && (
+                <Stack.Screen name="AdminMainApp" component={AdminMainTabNavigator} />
             )}
         </Stack.Navigator>
     );
