@@ -45,3 +45,11 @@ export type UserTabParamList = {
     UserNavigator: undefined;
     Notifications: undefined;
 };
+
+export type AdminTabParamList = {
+    Dashboard: undefined;
+    Buddies: undefined;
+    AddRoom: undefined;
+    Settings: undefined;
+  };
+  
