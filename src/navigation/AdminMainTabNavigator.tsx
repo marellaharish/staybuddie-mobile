@@ -55,7 +55,6 @@ const AdminTabNavigator = () => {
                     backgroundColor: '#fff',
                     position: 'absolute',
                 },
-                headerShown: false,
             })}
         >
             <Tab.Screen name="Dashboard" component={DashboardScreen} />
