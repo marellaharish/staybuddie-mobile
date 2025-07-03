@@ -22,15 +22,15 @@ export const NavigationProvider = ({ children }: { children: ReactNode }) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
 
-// const clearStorage = async () => {
-//     try {
-//       await AsyncStorage.clear();
-//       console.log('AsyncStorage cleared!');
-//     } catch (e) {
-//       console.error('Failed to clear AsyncStorage:', e);
-//     }
-// };
-    
+    // const clearStorage = async () => {
+    //     try {
+    //       await AsyncStorage.clear();
+    //       console.log('AsyncStorage cleared!');
+    //     } catch (e) {
+    //       console.error('Failed to clear AsyncStorage:', e);
+    //     }
+    // };
+
     useEffect(() => {
         // clearStorage();
         const loadStoredFlow = async () => {

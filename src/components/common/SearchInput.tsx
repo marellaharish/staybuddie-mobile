@@ -24,7 +24,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
                 backgroundColor: colors.gray100,
                 borderRadius: Metrics.radiusMedium,
                 paddingHorizontal: Metrics.paddingMedium,
-                paddingVertical: scale(4),
+                paddingVertical: scale(10),
                 ...Layouts.row,
             }}
         >

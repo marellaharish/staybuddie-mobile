@@ -10,7 +10,7 @@ import {
 import { scale, ScaledSheet } from 'react-native-size-matters';
 import { colors } from '../../constants/colors';
 
-type Variant = 'primary' | 'secondary' | 'outline';
+type Variant = 'primary' | 'secondary' | 'outline' | 'success' | 'danger' | 'warning';
 
 interface ButtonProps {
     title: string;
@@ -49,6 +49,21 @@ const Button: React.FC<ButtonProps> = ({
                 return {
                     container: styles.outline,
                     text: styles.outlineText,
+                };
+            case 'success':
+                return {
+                    container: { backgroundColor: colors.success500 },
+                    text: { color: colors.white },
+                };
+            case 'danger':
+                return {
+                    container: { backgroundColor: colors.danger100 },
+                    text: { color: colors.danger900 },
+                };
+            case 'warning':
+                return {
+                    container: { backgroundColor: colors.warning100 },
+                    text: { color: colors.warning900 },
                 };
             default:
                 return {
