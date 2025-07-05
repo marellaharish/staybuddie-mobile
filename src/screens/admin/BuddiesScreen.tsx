@@ -1,10 +1,13 @@
-import { BottomSheetBackdrop, BottomSheetModal, BottomSheetModalProvider, BottomSheetView } from '@gorhom/bottom-sheet';
-import { Phone } from 'lucide-react-native';
-import React, { useCallback, useRef, useState } from 'react';
-import { Alert, FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from 'expo-router';
+import { ArrowLeft, Filter, Phone, Plus } from 'lucide-react-native';
+import React, { useLayoutEffect, useState } from 'react';
+import { Alert, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import SearchInput from 'src/components/common/SearchInput';
 import { colors, FontSizes, Metrics } from 'src/constants';
+import { AdminTabParamList } from 'src/navigation/types';
 
 const initialBuddiesData = [
   {
@@ -32,21 +35,35 @@ const initialBuddiesData = [
 
 const BuddiesScreen = () => {
   const [buddies, setBuddies] = useState(initialBuddiesData);
-  const [selectedBuddy, setSelectedBuddy] = useState<typeof initialBuddiesData[0] | null>(null);
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const navigation = useNavigation<NativeStackNavigationProp<AdminTabParamList>>();
 
-  const handlePresentModalPress = useCallback((item: typeof initialBuddiesData[0]) => {
-    setSelectedBuddy(item);
-    bottomSheetModalRef.current?.present();
-  }, []);
 
-  const handleSave = () => {
-    if (!selectedBuddy) return;
-    setBuddies((prev) =>
-      prev.map((b) => (b.id === selectedBuddy.id ? selectedBuddy : b))
-    );
-    bottomSheetModalRef.current?.close();
-  };
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: `Edit Profile`,
+      headerTitleAlign: 'center', // This centers the title
+      headerShadowVisible: false,
+      headerLeft: () => (
+        <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: 15 }}>
+          <ArrowLeft size={24} color={colors.black} />
+        </TouchableOpacity>
+      ),
+      headerRight: () => (
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableOpacity style={[styles.filterButton, { marginRight: 15 }]}>
+            <Filter size={22} color={colors.black} />
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.addButton, { marginRight: 15 }]} onPress={() => navigation.navigate('AddBuddy')}>
+            <Plus size={22} color={colors.white} />
+          </TouchableOpacity>
+        </View>
+      ),
+
+    });
+  }, [navigation]);
+
+
+
 
   const handleDelete = (item: typeof initialBuddiesData[0]) => {
     Alert.alert(
@@ -100,10 +117,10 @@ const BuddiesScreen = () => {
       </View>
 
       <View style={styles.buttonRow}>
-        <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
+        <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item)}>
           <Text style={styles.buttonText}>Delete</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.editButton} onPress={() => handlePresentModalPress(item)}>
+        <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('EditBuddy', { buddy: item })}>
           <Text style={styles.buttonText}>Edit</Text>
         </TouchableOpacity>
       </View>
@@ -131,61 +148,6 @@ const BuddiesScreen = () => {
           showsVerticalScrollIndicator={false}
         />
 
-        <BottomSheetModal
-          ref={bottomSheetModalRef}
-          snapPoints={['80%']}
-          onChange={(index) => console.log('handleSheetChanges', index)}
-          onDismiss={() => setSelectedBuddy(null)}
-          backdropComponent={(props) => (
-            <BottomSheetBackdrop
-              {...props}
-              opacity={0.5}       // Adjust the darkness
-              appearsOnIndex={0}  // When to show
-              disappearsOnIndex={-1} // When to hide
-            />
-          )}
-        >
-          <BottomSheetView style={styles.sheetContent}>
-            {selectedBuddy && (
-              <>
-                <Text style={styles.sheetTitle}>Edit Buddy</Text>
-                <TextInput
-                  style={styles.input}
-                  value={selectedBuddy.name}
-                  onChangeText={(text) => setSelectedBuddy({ ...selectedBuddy, name: text })}
-                  placeholder="Name"
-                />
-                <TextInput
-                  style={styles.input}
-                  value={selectedBuddy.phone}
-                  onChangeText={(text) => setSelectedBuddy({ ...selectedBuddy, phone: text })}
-                  placeholder="Phone"
-                />
-                <TextInput
-                  style={styles.input}
-                  value={selectedBuddy.room}
-                  onChangeText={(text) => setSelectedBuddy({ ...selectedBuddy, room: text })}
-                  placeholder="Room No"
-                />
-                <TextInput
-                  style={styles.input}
-                  value={selectedBuddy.status}
-                  onChangeText={(text) => setSelectedBuddy({ ...selectedBuddy, status: text })}
-                  placeholder="Status (Paid/Pending)"
-                />
-
-                <View style={styles.sheetButtonRow}>
-                  <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-                    <Text style={styles.buttonText}>Save</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.cancelButton} onPress={() => bottomSheetModalRef.current?.close()}>
-                    <Text style={styles.buttonText}>Cancel</Text>
-                  </TouchableOpacity>
-                </View>
-              </>
-            )}
-          </BottomSheetView>
-        </BottomSheetModal>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );
@@ -203,7 +165,7 @@ const styles = StyleSheet.create({
     paddingBottom: 80,
   },
   card: {
-    backgroundColor: colors.gray50,
+    backgroundColor: colors.white,
     borderRadius: Metrics.radiusMedium,
     padding: Metrics.paddingMedium,
     marginBottom: Metrics.marginSmall,
@@ -212,6 +174,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 2,
+    borderWidth: 1,
+    borderColor: colors.gray200,
   },
   topRow: {
     flexDirection: 'row',
@@ -331,11 +295,18 @@ const styles = StyleSheet.create({
   chip: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.gray100,
-    paddingVertical: 4,
-    paddingHorizontal: 10,
+    backgroundColor: colors.white,
+    paddingVertical: Metrics.paddingSmall,
+    paddingHorizontal: Metrics.paddingSmall,
     borderRadius: Metrics.radiusMedium,
-    marginRight: 8,
+    marginRight: Metrics.marginSmall,
+    borderWidth: 1,
+    borderColor: colors.gray300,
+    shadowColor: colors.black,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
   },
 
   chipLabel: {
@@ -361,5 +332,13 @@ const styles = StyleSheet.create({
     borderColor: colors.danger300,
     borderWidth: 1,
   },
-
+  addButton: {
+    backgroundColor: colors.primary,
+    padding: 5,
+    borderRadius: 100,
+  }
 });
+function doDelete(id: string): void {
+  throw new Error('Function not implemented.');
+}
+

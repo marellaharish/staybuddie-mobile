@@ -51,5 +51,6 @@ export type AdminTabParamList = {
     Buddies: undefined;
     AddRoom: undefined;
     Settings: undefined;
-  };
-  
+    EditBuddy: { buddy: any };
+    AddBuddy: undefined;
+};

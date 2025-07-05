@@ -9,6 +9,8 @@ import AdminSettingsScreen from 'src/screens/admin/AdminSettingsScreen';
 import BuddiesScreen from 'src/screens/admin/BuddiesScreen';
 import DashboardScreen from 'src/screens/admin/DashboardScreen';
 
+import AddBuddy from 'src/screens/admin/AddBuddy';
+import EditBuddy from 'src/screens/admin/EditBuddy';
 import { AdminTabParamList } from './types';
 
 const Tab = createBottomTabNavigator<AdminTabParamList>();
@@ -69,6 +71,24 @@ const AdminMainTabNavigator = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="AdminMainTabs" component={AdminTabNavigator} />
+            <Stack.Screen
+                name="EditBuddy"
+                component={EditBuddy}
+                options={{
+                    presentation: 'modal',
+                    animation: 'slide_from_bottom',
+                    headerShown: true,
+                }}
+            />
+            <Stack.Screen
+                name="AddBuddy"
+                component={AddBuddy}
+                options={{
+                    presentation: 'modal',
+                    animation: 'slide_from_bottom',
+                    headerShown: true,
+                }}
+            />
         </Stack.Navigator>
     );
 };

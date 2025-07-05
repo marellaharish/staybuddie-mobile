@@ -44,7 +44,7 @@ const EditProfileScreen = () => {
 
   const handlePress = async () => {
     setLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 2000)); 
+    await new Promise(resolve => setTimeout(resolve, 2000));
     console.log("Button action done");
     setLoading(false);
   };
@@ -86,12 +86,12 @@ const EditProfileScreen = () => {
         <Text style={styles.inputLabel}>Phone Number</Text>
         <Input disabled placeholder="Enter phone number" containerStyle={styles.input} value='123456789'
           leftElement={<Phone size={20} color="#555" />}
-          />
+        />
 
         <Text style={styles.inputLabel}>Designation</Text>
         <Input placeholder="Enter designation" containerStyle={styles.input}
           leftElement={<IdCardLanyard size={20} color="#555" />}
-          />
+        />
 
         <Text style={styles.inputLabel}>Vehicle Number (Optional)</Text>
         <Input placeholder="Enter vehicle number" containerStyle={styles.input}
@@ -100,14 +100,14 @@ const EditProfileScreen = () => {
 
         <Text style={styles.inputLabel}>Guardian Name</Text>
         <Input placeholder="Enter guardian name" containerStyle={styles.input}
-          leftElement={<Shield  size={20} color="#555" />}
+          leftElement={<Shield size={20} color="#555" />}
         />
 
         <Text style={styles.inputLabel}>Guardian Phone Number</Text>
         <Input placeholder="Enter guardian's phone number" containerStyle={[styles.input, { marginBottom: 0 }]}
           leftElement={<Phone size={20} color="#555" />}
           value='9876543210'
-        
+
         />
       </View>
 
