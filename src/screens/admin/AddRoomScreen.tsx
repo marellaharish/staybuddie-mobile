@@ -39,7 +39,7 @@ const AddRoomScreen = () => {
       ),
       headerRight: () => (
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity style={[styles.filterButton, { marginRight: 15 }]}>
+          <TouchableOpacity style={[{ marginRight: 15 }]}>
             <Filter size={22} color={colors.black} />
           </TouchableOpacity>
           <TouchableOpacity style={[styles.addButton, { marginRight: 15 }]} onPress={() => navigation.navigate('AddBuddy')}>
