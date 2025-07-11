@@ -1,7 +1,7 @@
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from 'expo-router';
-import { ArrowLeft, Building, Filter, House, Plus, Users } from 'lucide-react-native';
+import { ArrowLeft, Building, Edit2, Filter, House, Plus, Trash2, Users } from 'lucide-react-native';
 import React, { useLayoutEffect, useState } from 'react';
 import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -12,15 +12,86 @@ import { AdminTabParamList } from 'src/navigation/types';
 const initialBuddiesData = [
   {
     id: '1',
-    name: 'Aarav Sharma',
-    phone: '+919876543210',
     room: '101',
-    joined: '2023-08-15',
-    lastPayment: '2024-05-20',
-    status: 'Paid',
-    image: 'https://i.pravatar.cc/150?img=1'
+    floor: '1',
+    sharing: '4',
+    occupied: '3',
+    vacancy: '1',
+  },
+  {
+    id: '2',
+    room: '102',
+    floor: '1',
+    sharing: '3',
+    occupied: '2',
+    vacancy: '1',
+  },
+  {
+    id: '3',
+    room: '201',
+    floor: '2',
+    sharing: '4',
+    occupied: '4',
+    vacancy: '0',
+  },
+  {
+    id: '4',
+    room: '202',
+    floor: '2',
+    sharing: '2',
+    occupied: '1',
+    vacancy: '1',
+  },
+  {
+    id: '5',
+    room: '203',
+    floor: '2',
+    sharing: '3',
+    occupied: '3',
+    vacancy: '0',
+  },
+  {
+    id: '6',
+    room: '301',
+    floor: '3',
+    sharing: '4',
+    occupied: '2',
+    vacancy: '2',
+  },
+  {
+    id: '7',
+    room: '302',
+    floor: '3',
+    sharing: '2',
+    occupied: '2',
+    vacancy: '0',
+  },
+  {
+    id: '8',
+    room: '303',
+    floor: '3',
+    sharing: '3',
+    occupied: '1',
+    vacancy: '2',
+  },
+  {
+    id: '9',
+    room: '401',
+    floor: '4',
+    sharing: '4',
+    occupied: '4',
+    vacancy: '0',
+  },
+  {
+    id: '10',
+    room: '402',
+    floor: '4',
+    sharing: '2',
+    occupied: '1',
+    vacancy: '1',
   },
 ];
+
 
 const AddRoomScreen = () => {
   const [buddies, setBuddies] = useState(initialBuddiesData);
@@ -72,7 +143,13 @@ const AddRoomScreen = () => {
     <View style={styles.card}>
       <View style={styles.topRow}>
         <View style={styles.info}>
-          <Text style={styles.name}>Room Number: {item.room}</Text>
+          <View style={[Layouts.row, Layouts.spaceBetween]}>
+            <Text style={styles.name}>Room Number: {item.room}</Text>
+            <View style={styles.phoneRow}>
+              <Edit2 size={20} color={colors.primary800} />
+              <Trash2 size={20} color={colors.danger800} onPress={() => handleDelete(item)} style={{ marginLeft: Metrics.marginMedium }} />
+            </View>
+          </View>
           <View style={[{ ...Layouts.row, marginTop: Metrics.marginSmall, ...Layouts.spaceBetween }]}>
             <View>
 
@@ -147,7 +224,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: Metrics.radiusMedium,
     padding: Metrics.paddingMedium,
-    marginBottom: Metrics.marginSmall,
+    marginBottom: Metrics.marginMedium,
     shadowColor: colors.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
