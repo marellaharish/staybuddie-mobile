@@ -3,7 +3,7 @@ import { Colors } from 'constants/Colors';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from 'expo-router';
 import { ArrowLeft } from 'lucide-react-native';
-import { useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useMemo, useState } from 'react';
 import { FlatList, Image, LogBox, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Button from 'src/components/common/Button';
 import Input from 'src/components/common/Input';
@@ -72,6 +72,8 @@ const paymentData = [
         description: 'Ceiling light not working in study area.',
     },
 ];
+
+const tabs = ['All', 'Pending', 'Resolved'];
 
 
 const ComplaintsScreen = () => {
@@ -142,6 +144,16 @@ const ComplaintsScreen = () => {
         // Trigger search/filter logic when user leaves the input
         console.log('User typed:', text);
     };
+
+
+    const [selectedTab, setSelectedTab] = useState('All');
+
+    const filteredData = useMemo(() => {
+        if (selectedTab === 'All') return paymentData;
+        if (selectedTab === 'Pending') return paymentData.filter(item => item.status === 'Pending');
+        if (selectedTab === 'Resolved') return paymentData.filter(item => item.status === 'Accepted' || item.status === 'Rejected');
+    }, [selectedTab]);
+
 
     return (
         <ScrollView style={[styles.container]}>
@@ -219,16 +231,24 @@ const ComplaintsScreen = () => {
                     placeholder="Search Complaints"
                 />
 
-                <View style={[Layouts.row, { marginTop: Metrics.marginSmall }]}>
-                    <View style={[styles.chip, styles.chipActive]}><Text style={[styles.chipText, styles.chipActiveText]}>All</Text></View>
-                    <View style={[styles.chip]}><Text style={[styles.chipText]}>Pending</Text></View>
-                    <View style={[styles.chip]}><Text style={[styles.chipText]}>Resolved</Text></View>
+                <View style={styles.tabContainer}>
+                    {tabs.map(tab => (
+                        <TouchableOpacity
+                            key={tab}
+                            onPress={() => setSelectedTab(tab)}
+                            style={[styles.chip, selectedTab === tab && styles.chipActive]}
+                        >
+                            <Text style={[styles.chipText, selectedTab === tab && styles.chipActiveText]}>
+                                {tab}
+                            </Text>
+                        </TouchableOpacity>
+                    ))}
                 </View>
 
 
 
                 <FlatList
-                    data={paymentData}
+                    data={filteredData}
                     renderItem={renderItem}
                     keyExtractor={(item, index) => index.toString()}
                     showsVerticalScrollIndicator={false}
@@ -295,5 +315,9 @@ const styles = StyleSheet.create({
     },
     chipActiveText: {
         color: colors.white
-    }
+    },
+    tabContainer: {
+        flexDirection: 'row',
+        marginBottom: 12,
+    },
 })
